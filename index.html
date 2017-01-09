@@ -1,0 +1,1817 @@
+<!doctype html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="initial-scale=1,user-scalable=no,maximum-scale=1,width=device-width">
+        <meta name="mobile-web-app-capable" content="yes">
+        <meta name="apple-mobile-web-app-capable" content="yes">
+        <link rel="stylesheet" href="css/leaflet.css" />
+        <link rel="stylesheet" type="text/css" href="css/qgis2web.css">
+        <link rel="stylesheet" href="css/MarkerCluster.css" />
+        <link rel="stylesheet" href="css/MarkerCluster.Default.css" />
+        <style>
+        html, body, #map {
+            width: 100%;
+            height: 100%;
+            padding: 0;
+            margin: 0;
+        }
+        </style>
+        <title></title>
+    </head>
+    <body>
+        <div id="map">
+        </div>
+        <script src="js/leaflet.js"></script>
+        <script src="js/leaflet-heat.js"></script>
+        <script src="js/leaflet.rotatedMarker.js"></script>
+        <script src="js/OSMBuildings-Leaflet.js"></script>
+        <script src="js/leaflet-hash.js"></script>
+        <script src="js/Autolinker.min.js"></script>
+        <script src="js/leaflet.markercluster.js"></script>
+        <script src="data/Regions0.js"></script>
+        <script src="data/Joinedlayer1.js"></script>
+        <script>
+        L.ImageOverlay.include({
+            getBounds: function () {
+                return this._bounds;
+            }
+        });
+        var map = L.map('map', {
+            zoomControl:true, maxZoom:28, minZoom:1
+        }).fitBounds([[42.1753899165,-71.5782144488],[42.4302081131,-71.0110225512]]);
+        var hash = new L.Hash(map);
+        map.attributionControl.addAttribution('<a href="https://github.com/tomchadwin/qgis2web" target="_blank">qgis2web</a>');
+        var feature_group = new L.featureGroup([]);
+        var bounds_group = new L.featureGroup([]);
+        var raster_group = new L.LayerGroup([]);
+        var basemap0 = L.tileLayer('http://{s}.www.toolserver.org/tiles/bw-mapnik/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap0.addTo(map);
+        var basemap1 = L.tileLayer('http://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            attribution: '&copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors,<a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>',
+            maxZoom: 28
+        });
+        basemap1.addTo(map);
+        function setBounds() {
+        }
+        function geoJson2heat(geojson, weight) {
+          return geojson.features.map(function(feature) {
+            return [
+              feature.geometry.coordinates[1],
+              feature.geometry.coordinates[0],
+              feature.properties[weight]
+            ];
+          });
+        }
+        function pop_Regions0(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <td colspan="2">' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Regions0(feature) {
+            switch(feature.properties['Name']) {
+                case '1':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(67,67,220,0.38)',
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(217,151,44,0.38)',
+            }
+                    break;
+                case '11':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(101,202,73,0.38)',
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(160,66,207,0.38)',
+            }
+                    break;
+                case '13':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(214,132,107,0.38)',
+            }
+                    break;
+                case '14':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(218,63,102,0.38)',
+            }
+                    break;
+                case '15':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(148,227,135,0.38)',
+            }
+                    break;
+                case '16':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(32,84,204,0.38)',
+            }
+                    break;
+                case '17':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(219,228,137,0.38)',
+            }
+                    break;
+                case '18':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(55,212,66,0.38)',
+            }
+                    break;
+                case '19':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(218,201,12,0.38)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(226,189,23,0.38)',
+            }
+                    break;
+                case '20':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(20,92,207,0.38)',
+            }
+                    break;
+                case '21':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(172,201,55,0.38)',
+            }
+                    break;
+                case '22':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(233,164,130,0.38)',
+            }
+                    break;
+                case '23':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(70,240,147,0.38)',
+            }
+                    break;
+                case '24':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(86,228,205,0.38)',
+            }
+                    break;
+                case '25':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(97,160,204,0.38)',
+            }
+                    break;
+                case '26':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(225,57,227,0.38)',
+            }
+                    break;
+                case '27':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(58,175,207,0.38)',
+            }
+                    break;
+                case '28':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(109,45,211,0.38)',
+            }
+                    break;
+                case '29':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(209,78,148,0.38)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(118,198,200,0.38)',
+            }
+                    break;
+                case '30':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(141,237,204,0.38)',
+            }
+                    break;
+                case '31':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(156,214,114,0.38)',
+            }
+                    break;
+                case '32':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(224,134,38,0.38)',
+            }
+                    break;
+                case '33':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(55,165,216,0.38)',
+            }
+                    break;
+                case '34':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(210,72,79,0.38)',
+            }
+                    break;
+                case '35':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(221,112,161,0.38)',
+            }
+                    break;
+                case '36':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(204,117,130,0.38)',
+            }
+                    break;
+                case '37':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(47,206,166,0.38)',
+            }
+                    break;
+                case '38':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(32,214,132,0.38)',
+            }
+                    break;
+                case '39':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(214,114,227,0.38)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(140,158,231,0.38)',
+            }
+                    break;
+                case '40':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(89,224,137,0.38)',
+            }
+                    break;
+                case '41':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(239,86,140,0.38)',
+            }
+                    break;
+                case '42':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(68,53,204,0.38)',
+            }
+                    break;
+                case '43':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(217,183,96,0.38)',
+            }
+                    break;
+                case '44':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(102,211,227,0.38)',
+            }
+                    break;
+                case '45':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(159,101,221,0.38)',
+            }
+                    break;
+                case '46':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(136,231,33,0.38)',
+            }
+                    break;
+                case '47':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(240,130,45,0.38)',
+            }
+                    break;
+                case '48':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(188,119,236,0.38)',
+            }
+                    break;
+                case '49':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(67,84,232,0.38)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(54,213,96,0.38)',
+            }
+                    break;
+                case '50':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(218,76,72,0.38)',
+            }
+                    break;
+                case '51':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(210,210,114,0.38)',
+            }
+                    break;
+                case '52':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(134,217,96,0.38)',
+            }
+                    break;
+                case '53':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(220,116,182,0.38)',
+            }
+                    break;
+                case '54':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(177,235,83,0.38)',
+            }
+                    break;
+                case '55':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(222,84,62,0.38)',
+            }
+                    break;
+                case '56':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(219,121,193,0.38)',
+            }
+                    break;
+                case '57':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(192,55,229,0.38)',
+            }
+                    break;
+                case '58':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(230,46,200,0.38)',
+            }
+                    break;
+                case '59':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(202,123,196,0.38)',
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(134,105,208,0.38)',
+            }
+                    break;
+                case '60':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(181,225,77,0.38)',
+            }
+                    break;
+                case '61':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(119,209,116,0.38)',
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(87,230,111,0.38)',
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(122,102,213,0.38)',
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(111,163,218,0.38)',
+            }
+                    break;
+                case '':
+                    return {
+                pane: 'pane_Regions0',
+                opacity: 1,
+                color: 'rgba(0,0,0,0.38)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1.0, 
+                fillOpacity: 1,
+                fillColor: 'rgba(73,236,226,0.38)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Regions0');
+        map.getPane('pane_Regions0').style.zIndex = 600;
+        map.getPane('pane_Regions0').style['mix-blend-mode'] = 'normal';
+    var layer_Regions0 = new L.geoJson(json_Regions0, {
+        pane: 'pane_Regions0',
+        onEachFeature: pop_Regions0,
+        style: style_Regions0
+    });
+        bounds_group.addLayer(layer_Regions0);
+        feature_group.addLayer(layer_Regions0);
+        function pop_Joinedlayer1(feature, layer) {
+            var popupContent = '<table>\
+                    <tr>\
+                        <th scope="row">Address</th>\
+                        <td>' + (feature.properties['Address'] !== null ? Autolinker.link(String(feature.properties['Address'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Owner Name</th>\
+                        <td>' + (feature.properties['Owner Name'] !== null ? Autolinker.link(String(feature.properties['Owner Name'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Customer I</th>\
+                        <td>' + (feature.properties['Customer I'] !== null ? Autolinker.link(String(feature.properties['Customer I'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Count</th>\
+                        <td>' + (feature.properties['Count'] !== null ? Autolinker.link(String(feature.properties['Count'])) : '') + '</td>\
+                    </tr>\
+                    <tr>\
+                        <th scope="row">Name</th>\
+                        <td>' + (feature.properties['Name'] !== null ? Autolinker.link(String(feature.properties['Name'])) : '') + '</td>\
+                    </tr>\
+                </table>';
+            layer.bindPopup(popupContent);
+        }
+
+        function style_Joinedlayer1(feature) {
+            switch(feature.properties['Name']) {
+                case 'NULL':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(100,33,233,1.0)',
+            }
+                    break;
+                case '1':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,137,217,1.0)',
+            }
+                    break;
+                case '10':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(31,223,198,1.0)',
+            }
+                    break;
+                case '11':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(178,99,223,1.0)',
+            }
+                    break;
+                case '12':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(90,212,63,1.0)',
+            }
+                    break;
+                case '13':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(104,211,62,1.0)',
+            }
+                    break;
+                case '14':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,165,22,1.0)',
+            }
+                    break;
+                case '15':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(85,112,201,1.0)',
+            }
+                    break;
+                case '16':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,226,180,1.0)',
+            }
+                    break;
+                case '17':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(197,212,99,1.0)',
+            }
+                    break;
+                case '18':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(119,221,199,1.0)',
+            }
+                    break;
+                case '19':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(159,233,112,1.0)',
+            }
+                    break;
+                case '2':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(230,115,47,1.0)',
+            }
+                    break;
+                case '20':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(79,211,106,1.0)',
+            }
+                    break;
+                case '21':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(63,134,219,1.0)',
+            }
+                    break;
+                case '22':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(196,201,46,1.0)',
+            }
+                    break;
+                case '23':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(96,208,205,1.0)',
+            }
+                    break;
+                case '24':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(118,85,217,1.0)',
+            }
+                    break;
+                case '25':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,201,117,1.0)',
+            }
+                    break;
+                case '26':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(236,137,168,1.0)',
+            }
+                    break;
+                case '27':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(199,23,238,1.0)',
+            }
+                    break;
+                case '28':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(124,209,157,1.0)',
+            }
+                    break;
+                case '29':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(214,33,106,1.0)',
+            }
+                    break;
+                case '3':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(88,167,209,1.0)',
+            }
+                    break;
+                case '30':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(164,221,111,1.0)',
+            }
+                    break;
+                case '31':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(65,201,228,1.0)',
+            }
+                    break;
+                case '32':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(207,123,198,1.0)',
+            }
+                    break;
+                case '33':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,234,178,1.0)',
+            }
+                    break;
+                case '34':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(208,75,49,1.0)',
+            }
+                    break;
+                case '35':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(204,109,176,1.0)',
+            }
+                    break;
+                case '36':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,71,88,1.0)',
+            }
+                    break;
+                case '37':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,154,25,1.0)',
+            }
+                    break;
+                case '38':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(117,17,204,1.0)',
+            }
+                    break;
+                case '39':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(223,208,120,1.0)',
+            }
+                    break;
+                case '4':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(240,33,78,1.0)',
+            }
+                    break;
+                case '40':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(26,220,233,1.0)',
+            }
+                    break;
+                case '41':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(167,220,97,1.0)',
+            }
+                    break;
+                case '42':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(202,34,135,1.0)',
+            }
+                    break;
+                case '43':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,51,35,1.0)',
+            }
+                    break;
+                case '44':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(57,84,237,1.0)',
+            }
+                    break;
+                case '45':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(182,212,81,1.0)',
+            }
+                    break;
+                case '46':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(219,174,118,1.0)',
+            }
+                    break;
+                case '47':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(125,121,210,1.0)',
+            }
+                    break;
+                case '48':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(209,118,84,1.0)',
+            }
+                    break;
+                case '49':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(28,202,46,1.0)',
+            }
+                    break;
+                case '5':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(82,57,221,1.0)',
+            }
+                    break;
+                case '50':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(167,224,53,1.0)',
+            }
+                    break;
+                case '51':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(109,177,201,1.0)',
+            }
+                    break;
+                case '52':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,103,236,1.0)',
+            }
+                    break;
+                case '53':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(229,84,227,1.0)',
+            }
+                    break;
+                case '54':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(56,240,111,1.0)',
+            }
+                    break;
+                case '55':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(171,60,215,1.0)',
+            }
+                    break;
+                case '56':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(225,220,110,1.0)',
+            }
+                    break;
+                case '57':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(213,148,92,1.0)',
+            }
+                    break;
+                case '58':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(35,141,228,1.0)',
+            }
+                    break;
+                case '59':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(212,78,145,1.0)',
+            }
+                    break;
+                case '6':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(98,220,169,1.0)',
+            }
+                    break;
+                case '60':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(161,121,212,1.0)',
+            }
+                    break;
+                case '61':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(42,107,236,1.0)',
+            }
+                    break;
+                case '7':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(114,119,223,1.0)',
+            }
+                    break;
+                case '8':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(220,105,107,1.0)',
+            }
+                    break;
+                case '9':
+                    return {
+                pane: 'pane_Joinedlayer1',
+                radius: 4.0,
+                opacity: 1,
+                color: 'rgba(0,0,0,1.0)',
+                dashArray: '',
+                lineCap: 'butt',
+                lineJoin: 'miter',
+                weight: 1,
+                fillOpacity: 1,
+                fillColor: 'rgba(91,208,91,1.0)',
+            }
+                    break;
+            }
+        }
+        map.createPane('pane_Joinedlayer1');
+        map.getPane('pane_Joinedlayer1').style.zIndex = 601;
+        map.getPane('pane_Joinedlayer1').style['mix-blend-mode'] = 'normal';
+        var layer_Joinedlayer1 = new L.geoJson(json_Joinedlayer1, {
+            pane: 'pane_Joinedlayer1',
+            onEachFeature: pop_Joinedlayer1,
+            pointToLayer: function (feature, latlng) {
+                return L.circleMarker(latlng, style_Joinedlayer1(feature))
+            }
+        });
+        var cluster_Joinedlayer1 = new L.MarkerClusterGroup({showCoverageOnHover: false});
+        cluster_Joinedlayer1.addLayer(layer_Joinedlayer1);
+
+        bounds_group.addLayer(layer_Joinedlayer1);
+        cluster_Joinedlayer1.addTo(map);
+        raster_group.addTo(map);
+        feature_group.addTo(map);
+        setBounds();
+        </script>
+    </body>
+</html>
